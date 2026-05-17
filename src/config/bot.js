@@ -1,108 +1,107 @@
 import { logger } from '../utils/logger.js';
 
-
 export const botConfig = {
   // =========================
-  // BOT PRESENCE (what users see under the bot name)
+  // ПРИСУТСТВИЕ БОТА (что пользователи видят под ником бота)
   // =========================
-  // `status` options:
-  // - "online"    = green dot
-  // - "idle"      = yellow moon
-  // - "dnd"       = red do-not-disturb
-  // - "invisible" = appears offline
+  // `status` опции:
+  // - "online"    = зелёная точка
+  // - "idle"      = жёлтая луна
+  // - "dnd"       = красный "не беспокоить"
+  // - "invisible" = невидимка
   presence: {
-    // Current online state shown on Discord.
+    // Текущий статус онлайн в Discord.
     status: "online",
 
-    // Activity lines shown under the bot name.
-    // `type` number mapping from Discord:
-    // 0 = Playing
-    // 1 = Streaming
-    // 2 = Listening
-    // 3 = Watching
-    // 4 = Custom
-    // 5 = Competing
+    // Строки активности под ником бота.
+    // Числовое значение `type` от Discord:
+    // 0 = Играет в
+    // 1 = Стримит
+    // 2 = Слушает
+    // 3 = Смотрит
+    // 4 = Пользовательский
+    // 5 = Соревнуется в
     activities: [
       {
-        // Text users will see (example: "Playing /help | Titan Bot").
-        name: "Made with ❤️",
-        // Activity type number (0 = Playing).
+        // Текст, который увидят пользователи (пример: "Играет в /help | Titan Bot").
+        name: "Сделано с ❤️",
+        // Тип активности (0 = Играет в).
         type: 0, 
       },
     ],
   },
 
   // =========================
-  // COMMAND BEHAVIOR
+  // ПОВЕДЕНИЕ КОМАНД
   // =========================
   commands: {
-    // Bot owner user IDs (comma-separated in OWNER_IDS env var).
-    // Owners can access owner/admin-level bot commands.
+    // ID пользователей-владельцев бота (через запятую в переменной окружения OWNER_IDS).
+    // Владельцы могут использовать команды уровня администратора.
     owners: process.env.OWNER_IDS?.split(",") || [],
 
-    // Default wait time between command uses (in seconds).
+    // Время ожидания между использованиями команд по умолчанию (в секундах).
     defaultCooldown: 3, 
 
-    // If true, old commands are removed before re-registering.
+    // Если true, старые команды удаляются перед повторной регистрацией.
     deleteCommands: false,
 
-    // Optional server ID used for testing slash commands quickly.
+    // Опциональный ID сервера для быстрого тестирования слеш-команд.
     testGuildId: process.env.TEST_GUILD_ID,
   },
 
   // =========================
-  // APPLICATIONS SYSTEM
+  // СИСТЕМА ЗАЯВОК
   // =========================
   applications: {
-    // Default questions shown when someone fills out an application.
+    // Стандартные вопросы при заполнении заявки.
     defaultQuestions: [
-      { question: "What is your name?", required: true },
-      { question: "How old are you?", required: true },
-      { question: "Why do you want to join?", required: true },
+      { question: "Как вас зовут?", required: true },
+      { question: "Сколько вам лет?", required: true },
+      { question: "Почему вы хотите присоединиться?", required: true },
     ],
 
-    // Embed colors by application status.
+    // Цвета встраиваемых сообщений по статусу заявки.
     statusColors: {
       pending: "#FFA500",
       approved: "#00FF00",
       denied: "#FF0000",
     },
 
-    // How long users must wait before submitting another application (hours).
+    // Как долго пользователи должны ждать перед следующей заявкой (часы).
     applicationCooldown: 24, 
 
-    // Auto-delete denied applications after this many days.
+    // Автоудаление отклонённых заявок через указанное количество дней.
     deleteDeniedAfter: 7, 
 
-    // Auto-delete approved applications after this many days.
+    // Автоудаление одобренных заявок через указанное количество дней.
     deleteApprovedAfter: 30, 
 
-    // Role IDs allowed to manage applications.
-    managerRoles: [], // Will be populated from environment or database
+    // ID ролей, которым разрешено управлять заявками.
+    managerRoles: [], // Будут заполнены из окружения или базы данных
   },
 
   // =========================
-  // EMBED COLORS & BRANDING
+  // ЦВЕТА ВСТРАИВАЕМЫХ СООБЩЕНИЙ И БРЕНДИНГ
   // =========================
-  // IMPORTANT: This is the SINGLE SOURCE OF TRUTH for all bot colors
+  // ВАЖНО: Это ЕДИНСТВЕННЫЙ ИСТОЧНИК ПРАВДЫ для всех цветов бота
   embeds: {
     colors: {
-      // Main brand colors.
+      // Основные брендовые цвета.
       primary: "#008000", 
       secondary: "#2F3136", 
 
-      // Standard status colors for success/error/warning/info messages.
+      // Стандартные статусные цвета для успеха/ошибки/предупреждения/информации.
       success: "#57F287", 
       error: "#ED4245", 
       warning: "#FEE75C", 
       info: "#3498DB", 
 
-      // Neutral utility colors.
+      // Нейтральные служебные цвета.
       light: "#FFFFFF",
       dark: "#202225",
       gray: "#99AAB5",
 
-      // Discord-style palette shortcuts.
+      // Короткие цвета в стиле Discord.
       blurple: "#5865F2",
       green: "#57F287",
       yellow: "#FEE75C",
@@ -110,7 +109,7 @@ export const botConfig = {
       red: "#ED4245",
       black: "#000000",
 
-      // Feature-specific colors.
+      // Цвета для конкретных функций.
       giveaway: {
         active: "#57F287",
         ended: "#ED4245",
@@ -125,7 +124,7 @@ export const botConfig = {
       birthday: "#E91E63",
       moderation: "#9B59B6",
 
-      // Ticket priority color mapping.
+      // Цвета по приоритету тикетов.
       priority: {
         none: "#95A5A6",
         low: "#3498db",
@@ -135,15 +134,15 @@ export const botConfig = {
       },
     },
     footer: {
-      // Default footer text used in bot embeds.
+      // Текст нижнего колонтитула по умолчанию.
       text: "Titan Bot",
-      // Footer icon URL (null = no icon).
+      // URL иконки нижнего колонтитула (null = нет иконки).
       icon: null,
     },
-    // Default thumbnail URL for embeds (null = no thumbnail).
+    // URL миниатюры по умолчанию (null = нет миниатюры).
     thumbnail: null,
     author: {
-      // Optional default embed author block.
+      // Опциональный блок автора по умолчанию.
       name: null,
       icon: null,
       url: null,
@@ -151,266 +150,265 @@ export const botConfig = {
   },
 
   // =========================
-  // ECONOMY SETTINGS
+  // НАСТРОЙКИ ЭКОНОМИКИ
   // =========================
   economy: {
     currency: {
-      // Currency display name.
-      name: "coins",
-      // Plural display name.
-      namePlural: "coins",
-      // Currency symbol shown in balances.
+      // Отображаемое название валюты.
+      name: "монет",
+      // Название во множественном числе.
+      namePlural: "монет",
+      // Символ валюты в балансах.
       symbol: "$",
     },
 
-    // Starting balance for new users.
+    // Начальный баланс для новых пользователей.
     startingBalance: 0,
 
-    // Maximum bank amount before upgrades (if upgrades are used).
+    // Максимальная вместимость банка до улучшений (если улучшения используются).
     baseBankCapacity: 100000,
 
-    // Daily reward amount.
+    // Ежедневная награда.
     dailyAmount: 100,
 
-    // Work command random payout range.
+    // Диапазон случайных выплат команды work.
     workMin: 10,
     workMax: 100,
 
-    // Beg command random payout range.
+    // Диапазон случайных выплат команды beg.
     begMin: 5,
     begMax: 50,
 
-    // Chance to succeed when robbing (0.4 = 40%).
+    // Шанс успеха при ограблении (0.4 = 40%).
     robSuccessRate: 0.4,
 
-    // Jail time after failed rob (milliseconds).
-    // 3600000 = 1 hour.
+    // Время тюрьмы после провального ограбления (миллисекунды).
+    // 3600000 = 1 час.
     robFailJailTime: 3600000, 
   },
 
   // =========================
-  // SHOP SETTINGS
+  // НАСТРОЙКИ МАГАЗИНА
   // =========================
-  // Add shop defaults here when needed.
   shop: {
     
   },
 
   // =========================
-  // TICKET SYSTEM
+  // СИСТЕМА ТИКЕТОВ
   // =========================
   tickets: {
-    // Category ID where new tickets are created (null = no forced category).
+    // ID категории, где создаются новые тикеты (null = без принудительной категории).
     defaultCategory: null,
 
-    // Role IDs allowed to manage/support tickets.
+    // ID ролей, которым разрешено управлять/поддерживать тикеты.
     supportRoles: [],
 
-    // Priority options users/staff can assign.
+    // Опции приоритета для назначения пользователями/персоналом.
     priorities: {
       none: {
         emoji: "⚪",
         color: "#95A5A6",
-        label: "None",
+        label: "Нет",
       },
       low: {
         emoji: "🟢",
         color: "#2ECC71",
-        label: "Low",
+        label: "Низкий",
       },
       medium: {
         emoji: "🟡",
         color: "#F1C40F",
-        label: "Medium",
+        label: "Средний",
       },
       high: {
         emoji: "🔴",
         color: "#E74C3C",
-        label: "High",
+        label: "Высокий",
       },
       urgent: {
         emoji: "🚨",
         color: "#E91E63",
-        label: "Urgent",
+        label: "Срочный",
       },
     },
 
-    // Default priority for new tickets.
+    // Приоритет по умолчанию для новых тикетов.
     defaultPriority: "none",
 
-    // Category ID where closed tickets are archived.
+    // ID категории, куда архивируются закрытые тикеты.
     archiveCategory: null,
 
-    // Channel ID where ticket logs are sent.
+    // ID канала, куда отправляются логи тикетов.
     logChannel: null,
   },
 
   // =========================
-  // GIVEAWAY SETTINGS
+  // НАСТРОЙКИ РОЗЫГРЫШЕЙ
   // =========================
   giveaways: {
-    // Default giveaway duration in milliseconds.
-    // 86400000 = 24 hours.
+    // Длительность розыгрыша по умолчанию в миллисекундах.
+    // 86400000 = 24 часа.
     defaultDuration: 86400000, 
 
-    // Allowed winner count range.
+    // Диапазон допустимого количества победителей.
     minimumWinners: 1,
     maximumWinners: 10,
 
-    // Allowed giveaway duration range in milliseconds.
-    // 300000 = 5 minutes.
+    // Диапазон допустимой длительности розыгрыша в миллисекундах.
+    // 300000 = 5 минут.
     minimumDuration: 300000, 
-    // 2592000000 = 30 days.
+    // 2592000000 = 30 дней.
     maximumDuration: 2592000000, 
 
-    // Role IDs allowed to host giveaways.
+    // ID ролей, которым разрешено проводить розыгрыши.
     allowedRoles: [],
 
-    // Role IDs that bypass giveaway restrictions.
+    // ID ролей, которые обходят ограничения розыгрышей.
     bypassRoles: [],
   },
 
   // =========================
-  // BIRTHDAY SETTINGS
+  // НАСТРОЙКИ ДНЕЙ РОЖДЕНИЯ
   // =========================
   birthday: {
-    // Role ID given to users on their birthday.
+    // ID роли, выдаваемой пользователям в день рождения.
     defaultRole: null,
 
-    // Channel ID where birthday announcements are posted.
+    // ID канала, куда публикуются объявления о дне рождения.
     announcementChannel: null,
 
-    // Timezone used to calculate birthday dates.
+    // Часовой пояс для расчёта дат рождения.
     timezone: "UTC",
   },
 
   // =========================
-  // VERIFICATION SETTINGS
+  // НАСТРОЙКИ ВЕРИФИКАЦИИ
   // =========================
   verification: {
-    // Message shown when posting the verification panel.
-    defaultMessage: "Click the button below to verify yourself and gain access to the server!",
+    // Сообщение при публикации панели верификации.
+    defaultMessage: "Нажмите на кнопку ниже, чтобы верифицироваться и получить доступ к серверу!",
 
-    // Text on the verification button.
-    defaultButtonText: "Verify",
+    // Текст на кнопке верификации.
+    defaultButtonText: "Верификация",
 
-    // Automatic verification behavior.
+    // Настройки автоматической верификации.
     autoVerify: {
-      // How automatic verification decides who is auto-approved:
-      // - "none"        = everyone is auto-verified immediately
-      // - "account_age" = account must be older than set days
-      // - "server_size" = auto-verify everyone only in smaller servers
+      // Как автоматическая верификация решает, кто будет автоодобрен:
+      // - "none"        = все верифицируются автоматически
+      // - "account_age" = аккаунт должен быть старше указанного количества дней
+      // - "server_size" = авто-верификация всех только на маленьких серверах
       defaultCriteria: "none",
 
-      // Days used when `defaultCriteria` is `account_age`.
+      // Количество дней, используемое когда `defaultCriteria` = `account_age`.
       defaultAccountAgeDays: 7,
 
-      // Member count threshold used when `defaultCriteria` is `server_size`.
-      // Example: 1000 means auto-verify if server has fewer than 1000 members.
+      // Порог количества участников для `defaultCriteria` = `server_size`.
+      // Пример: 1000 означает авто-верификацию, если на сервере меньше 1000 участников.
       serverSizeThreshold: 1000,
 
-      // Allowed safety limits for account-age requirements.
-      // 1 = minimum day, 365 = maximum days.
+      // Допустимые лимиты безопасности для требований к возрасту аккаунта.
+      // 1 = минимальный день, 365 = максимальное количество дней.
       minAccountAge: 1,      
       maxAccountAge: 365,    
 
-      // If true, user receives a DM after verification.
+      // Если true, пользователь получает ЛС после верификации.
       sendDMNotification: true,
 
-      // Human-readable descriptions for each criteria mode.
+      // Человеко-читаемые описания для каждого режима критерия.
       criteria: {
-        account_age: "Account must be older than specified days",
-        server_size: "All users if server has less than 1000 members",
-        none: "All users immediately"
+        account_age: "Аккаунт должен быть старше указанного количества дней",
+        server_size: "Все пользователи, если на сервере меньше 1000 участников",
+        none: "Все пользователи немедленно"
       }
     },
 
-    // Minimum time between verification attempts (milliseconds).
-    // 5000 = 5 seconds.
+    // Минимальное время между попытками верификации (миллисекунды).
+    // 5000 = 5 секунд.
     verificationCooldown: 5000,  
 
-    // Maximum failed attempts allowed inside the time window below.
+    // Максимальное количество неудачных попыток за временное окно ниже.
     maxVerificationAttempts: 3,   
 
-    // Time window for counting attempts (milliseconds).
-    // 60000 = 1 minute.
+    // Временное окно для подсчёта попыток (миллисекунды).
+    // 60000 = 1 минута.
     attemptWindow: 60000,          
 
-    // In-memory safety limits (helps avoid unbounded memory growth).
+    // Лимиты безопасности в памяти (помогает избежать неограниченного роста памяти).
     maxCooldownEntries: 10000,
     maxAttemptEntries: 10000,
-    // Cleanup frequency for cooldown/attempt maps (milliseconds).
-    // 300000 = 5 minutes.
+    // Частота очистки карт кулдауна/попыток (миллисекунды).
+    // 300000 = 5 минут.
     cooldownCleanupInterval: 300000, 
-    // Maximum metadata payload size for audit entries (bytes).
+    // Максимальный размер метаданных для записей аудита (байты).
     maxAuditMetadataBytes: 4096,
-    // Maximum number of audit entries kept in memory.
+    // Максимальное количество записей аудита в памяти.
     maxInMemoryAuditEntries: 1000,
-  // If true, log every verification action.
-  logAllVerifications: true,
-  // If true, preserve verification audit history.
-  keepAuditTrail: true,
+    // Если true, логирует каждое действие верификации.
+    logAllVerifications: true,
+    // Если true, сохраняет историю аудита верификации.
+    keepAuditTrail: true,
   },
 
   // =========================
-  // WELCOME / GOODBYE MESSAGES
+  // ПРИВЕТСТВЕННЫЕ / ПРОЩАЛЬНЫЕ СООБЩЕНИЯ
   // =========================
   welcome: {
-    // Welcome template posted when a user joins.
-    // Placeholders: {user}, {server}, {memberCount}
+    // Шаблон приветствия при входе пользователя.
+    // Плейсхолдеры: {user}, {server}, {memberCount}
     defaultWelcomeMessage:
-      "Welcome {user} to {server}! We now have {memberCount} members!",
-    // Goodbye template posted when a user leaves.
-    // Placeholders: {user}, {memberCount}
+      "Добро пожаловать {user} на {server}! Теперь нас {memberCount} участников!",
+    // Шаблон прощания при уходе пользователя.
+    // Плейсхолдеры: {user}, {memberCount}
     defaultGoodbyeMessage:
-      "{user} has left the server. We now have {memberCount} members.",
-    // Channel ID for welcome messages.
+      "{user} покинул сервер. Теперь нас {memberCount} участников.",
+    // ID канала для приветственных сообщений.
     defaultWelcomeChannel: null,
-    // Channel ID for goodbye messages.
+    // ID канала для прощальных сообщений.
     defaultGoodbyeChannel: null,
   },
 
   // =========================
-  // COUNTER CHANNELS
+  // КАНАЛЫ-СЧЁТЧИКИ
   // =========================
   counters: {
     defaults: {
-      // Default naming/description templates for counter entries.
-      name: "{name} Counter",
-      description: "Server {name} counter",
-      // Channel type used for counters (typically "voice").
+      // Шаблоны названий/описаний по умолчанию.
+      name: "Счётчик {name}",
+      description: "Счётчик {name} сервера",
+      // Тип канала для счётчиков (обычно "voice").
       type: "voice",
-      // Channel name format. `{count}` is replaced automatically.
+      // Формат названия канала. `{count}` заменяется автоматически.
       channelName: "{name}-{count}",
     },
     permissions: {
-      // Default denied permissions for the counter channel.
+      // Запрещённые права по умолчанию.
       deny: ["VIEW_CHANNEL"],
-      // Default allowed permissions for the counter channel.
+      // Разрешённые права по умолчанию.
       allow: ["VIEW_CHANNEL", "CONNECT", "SPEAK"],
     },
     messages: {
-      // Default response messages for counter actions.
-      created: "✅ Created counter **{name}**",
-      deleted: "🗑️ Deleted counter **{name}**",
-      updated: "🔄 Updated counter **{name}**",
+      // Стандартные ответные сообщения для действий со счётчиками.
+      created: "✅ Создан счётчик **{name}**",
+      deleted: "🗑️ Удалён счётчик **{name}**",
+      updated: "🔄 Обновлён счётчик **{name}**",
     },
     types: {
-      // Built-in counter types and how each count is calculated.
+      // Встроенные типы счётчиков и как каждый считается.
       members: {
-        name: "👥 Members",
-        description: "Total members in the server",
+        name: "👥 Участников",
+        description: "Всего участников на сервере",
         getCount: (guild) => guild.memberCount.toString(),
       },
       bots: {
-        name: "🤖 Bots",
-        description: "Total bot accounts in the server",
+        name: "🤖 Ботов",
+        description: "Всего ботов на сервере",
         getCount: (guild) =>
           guild.members.cache.filter((m) => m.user.bot).size.toString(),
       },
       members_only: {
-        name: "👤 Humans",
-        description: "Total human members (non-bots)",
+        name: "👤 Людей",
+        description: "Всего людей (не ботов)",
         getCount: (guild) =>
           guild.members.cache.filter((m) => !m.user.bot).size.toString(),
       },
@@ -418,42 +416,42 @@ export const botConfig = {
   },
 
   // =========================
-  // GENERIC BOT MESSAGES
+  // СТАНДАРТНЫЕ СООБЩЕНИЯ БОТА
   // =========================
   messages: {
-    noPermission: "You do not have permission to use this command.",
-    cooldownActive: "Please wait {time} before using this command again.",
-    errorOccurred: "An error occurred while executing this command.",
+    noPermission: "У вас нет прав для использования этой команды.",
+    cooldownActive: "Пожалуйста, подождите {time} перед повторным использованием этой команды.",
+    errorOccurred: "Произошла ошибка при выполнении этой команды.",
     missingPermissions:
-      "I am missing required permissions to perform this action.",
-    commandDisabled: "This command has been disabled.",
-    maintenanceMode: "The bot is currently in maintenance mode.",
+      "У меня нет необходимых прав для выполнения этого действия.",
+    commandDisabled: "Эта команда отключена.",
+    maintenanceMode: "Бот сейчас находится в режиме обслуживания.",
   },
 
   // =========================
-  // FEATURE TOGGLES
+  // ВКЛЮЧЕНИЕ/ОТКЛЮЧЕНИЕ ФУНКЦИЙ
   // =========================
-  // Set any feature to `false` to disable it globally.
+  // Установите `false` для любой функции, чтобы отключить её глобально.
   features: {
-    // Core systems.
+    // Основные системы.
     economy: true,
     leveling: true,
     moderation: true,
     logging: true,
     welcome: true,
 
-    // Community engagement systems.
+    // Системы вовлечения сообщества.
     tickets: true,
     giveaways: true,
     birthday: true,
     counter: true,
 
-    // Security and self-service systems.
+    // Системы безопасности и самообслуживания.
     verification: true,
     reactionRoles: true,
     joinToCreate: true,
 
-    // Utility/quality-of-life modules.
+    // Модули полезности/качества жизни.
     voice: true,
     search: true,
     tools: true,
@@ -463,62 +461,60 @@ export const botConfig = {
   },
 };
 
-
 export function validateConfig(config) {
   const errors = [];
 
   
   if (process.env.NODE_ENV !== 'production') {
-    logger.debug('Environment variables check:');
-    logger.debug('DISCORD_TOKEN exists:', !!process.env.DISCORD_TOKEN);
-    logger.debug('TOKEN exists:', !!process.env.TOKEN);
-    logger.debug('CLIENT_ID exists:', !!process.env.CLIENT_ID);
-    logger.debug('GUILD_ID exists:', !!process.env.GUILD_ID);
-    logger.debug('POSTGRES_HOST exists:', !!process.env.POSTGRES_HOST);
+    logger.debug('Проверка переменных окружения:');
+    logger.debug('DISCORD_TOKEN существует:', !!process.env.DISCORD_TOKEN);
+    logger.debug('TOKEN существует:', !!process.env.TOKEN);
+    logger.debug('CLIENT_ID существует:', !!process.env.CLIENT_ID);
+    logger.debug('GUILD_ID существует:', !!process.env.GUILD_ID);
+    logger.debug('POSTGRES_HOST существует:', !!process.env.POSTGRES_HOST);
     logger.debug('NODE_ENV:', process.env.NODE_ENV);
   }
 
   if (!process.env.DISCORD_TOKEN && !process.env.TOKEN) {
-    errors.push("Bot token is required (DISCORD_TOKEN or TOKEN environment variable)");
+    errors.push("Токен бота обязателен (переменная окружения DISCORD_TOKEN или TOKEN)");
   }
 
   if (!process.env.CLIENT_ID) {
-    errors.push("Client ID is required (CLIENT_ID environment variable)");
+    errors.push("ID клиента обязателен (переменная окружения CLIENT_ID)");
   }
 
   
   if (process.env.NODE_ENV === 'production') {
     if (!process.env.POSTGRES_HOST) {
-      errors.push("PostgreSQL host is required in production (POSTGRES_HOST environment variable)");
+      errors.push("Хост PostgreSQL обязателен в продакшене (переменная окружения POSTGRES_HOST)");
     }
     if (!process.env.POSTGRES_USER) {
-      errors.push("PostgreSQL user is required in production (POSTGRES_USER environment variable)");
+      errors.push("Пользователь PostgreSQL обязателен в продакшене (переменная окружения POSTGRES_USER)");
     }
     if (!process.env.POSTGRES_PASSWORD) {
-      errors.push("PostgreSQL password is required in production (POSTGRES_PASSWORD environment variable)");
+      errors.push("Пароль PostgreSQL обязателен в продакшене (переменная окружения POSTGRES_PASSWORD)");
     }
   }
 
   return errors;
 }
 
-
+// Валидация конфигурации
 const configErrors = validateConfig(botConfig);
 if (configErrors.length > 0) {
-  logger.error("Bot configuration errors:", configErrors.join("\n"));
+  logger.error("Ошибки конфигурации бота:", configErrors.join("\n"));
   if (process.env.NODE_ENV === "production") {
     process.exit(1);
   }
 }
 
-
 export const BotConfig = botConfig;
 
 export function getColor(path, fallback = "#99AAB5") {
-  
+  // Поддержка числовых значений цветов
   if (typeof path === "number") return path;
   if (typeof path === "string" && path.startsWith("#")) {
-    
+    // Преобразование HEX строки в число
     return parseInt(path.replace("#", ""), 16);
   }
   const result = path
@@ -528,7 +524,7 @@ export function getColor(path, fallback = "#99AAB5") {
       botConfig.embeds.colors,
     );
   
-  // Convert the result to integer if it's a hex string
+  // Преобразование результата в число, если это HEX строка
   if (typeof result === "string" && result.startsWith("#")) {
     return parseInt(result.replace("#", ""), 16);
   }
@@ -543,7 +539,3 @@ export function getRandomColor() {
 }
 
 export default botConfig;
-
-
-
-
